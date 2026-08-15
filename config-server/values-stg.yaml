@@ -1,0 +1,25 @@
+global:
+  domain: vucongtuanduong.dpdns.org
+  prefix: web-dev1
+
+image:
+  registry: docker.io
+  repository: vucongtuanduong/web-grading-system-config-server
+  tag: "v1.0.0"
+  pullPolicy: Always
+
+spring:
+  profilesActive: "stg,native"
+  dbName: config_db
+
+service:
+  type: ClusterIP
+  port: 8888
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi

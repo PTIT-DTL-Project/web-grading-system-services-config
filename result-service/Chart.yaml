@@ -1,0 +1,5 @@
+apiVersion: v2
+name: result-service
+description: Helm chart for result-service
+version: 1.0.0
+appVersion: "1.0"
