@@ -20,7 +20,6 @@ config-services/
 │   ├── values-stg.yaml
 │   └── templates/
 ├── api-gateway/
-├── config-server/
 ├── result-service/
 └── assignment-service/
 ```
@@ -32,7 +31,6 @@ Tên service phải khớp với tên trong source repo:
 - `submission-service`
 - `executor-service`
 - `api-gateway`
-- `config-server`
 - `result-service`
 - `assignment-service`
 
@@ -181,11 +179,6 @@ git push
 - Port: 8080
 - Gateway chính
 - Routing rules
-
-### config-server
-- Port: 8888
-- Spring Cloud Config Server
-- Git backend configuration
 
 ### result-service
 - Result computation và storage

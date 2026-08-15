@@ -14,7 +14,6 @@ NC='\033[0m' # No Color
 # Service configurations
 declare -A SERVICES=(
     ["api-gateway"]="8080:api_gateway_db"
-    ["config-server"]="8888:config_db"
     ["executor-service"]="8083:executor_db"
     ["result-service"]="8084:result_db"
     ["assignment-service"]="8085:assignment_db"
