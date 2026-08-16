@@ -5,7 +5,7 @@ global:
 image:
   registry: docker.io
   repository: vucongtuanduong/web-grading-system-result-service
-  tag: "v1.0.0"
+  tag: "v1.0.1"
   pullPolicy: Always
 
 spring:
