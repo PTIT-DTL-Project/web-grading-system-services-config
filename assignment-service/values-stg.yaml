@@ -5,7 +5,7 @@ global:
 image:
   registry: docker.io
   repository: vucongtuanduong/web-grading-system-assignment-service
-  tag: "v1.0.1"
+  tag: "v1.0.2"
   pullPolicy: Always
 
 spring:
