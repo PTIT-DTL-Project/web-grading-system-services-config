@@ -63,6 +63,12 @@ spec:
                   name: rustfs-secret
                   key: RUSTFS_SECRET_KEY
                   optional: true
+            - name: RUSTFS_PUBLIC_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: rustfs-secret
+                  key: RUSTFS_PUBLIC_ENDPOINT
+                  optional: true
             - name: REGION
               value: {{ .Values.observability.region | quote }}
             - name: CLUSTER
