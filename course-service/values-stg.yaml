@@ -4,7 +4,7 @@ global:
 
 image:
   registry: docker.io
-  repository: vucongtuanduong/web-grading-system-assignment-service
+  repository: vucongtuanduong/web-grading-system-course-service
   tag: "v1.0.4"
   pullPolicy: Always
 

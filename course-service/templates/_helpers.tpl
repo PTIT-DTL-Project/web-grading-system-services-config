@@ -1,9 +1,9 @@
 {{/* vim: set filetype=mustache: */}}
-{{- define "assignment-service.name" -}}
+{{- define "course-service.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63  }}
 {{- end }}
 
-{{- define "assignment-service.fullname" -}}
+{{- define "course-service.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63  }}
 {{- else }}

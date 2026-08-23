@@ -16,7 +16,7 @@ declare -A SERVICES=(
     ["api-gateway"]="8080:api_gateway_db"
     ["executor-service"]="8083:executor_db"
     ["result-service"]="8084:result_db"
-    ["assignment-service"]="8085:assignment_db"
+    ["course-service"]="8085:assignment_db"
 )
 
 DOCKER_USERNAME="vucongtuanduong"

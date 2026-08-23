@@ -21,7 +21,7 @@ config-services/
 │   └── templates/
 ├── api-gateway/
 ├── result-service/
-└── assignment-service/
+└── course-service/
 ```
 
 ## 📝 Quy tắc đặt tên
@@ -32,7 +32,7 @@ Tên service phải khớp với tên trong source repo:
 - `executor-service`
 - `api-gateway`
 - `result-service`
-- `assignment-service`
+- `course-service`
 
 ### Values Files
 - `values-stg.yaml`: Configuration cho staging environment
@@ -184,7 +184,7 @@ git push
 - Result computation và storage
 - Database: result_db
 
-### assignment-service
+### course-service
 - Assignment và test case management
 - Database: assignment_db
 

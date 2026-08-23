@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "assignment-service.fullname" . }}
+  name: {{ include "course-service.fullname" . }}
   labels:
-    app: {{ include "assignment-service.name" . }}
+    app: {{ include "course-service.name" . }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ include "assignment-service.name" . }}
+      app: {{ include "course-service.name" . }}
   template:
     metadata:
       labels:
-        app: {{ include "assignment-service.name" . }}
+        app: {{ include "course-service.name" . }}
     spec:
       containers:
         - name: {{ .Chart.Name }}

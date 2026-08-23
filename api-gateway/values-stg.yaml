@@ -17,7 +17,7 @@ observability:
   cluster: k3s-local
 
 serviceUris:
-  assignment: http://grading-assignment-service:8081
+  course: http://grading-course-service:8081
   submission: http://grading-submission-service:8082
   result: http://grading-result-service:8084
 
