@@ -49,6 +49,12 @@ spec:
               value: {{ .Values.observability.region | quote }}
             - name: CLUSTER
               value: {{ .Values.observability.cluster | quote }}
+            - name: LOGGING_LEVEL_VN_EDU_PTIT_WEB_GRADING_SYSTEM
+              valueFrom:
+                secretKeyRef:
+                  name: app-config
+                  key: LOG_LEVEL
+                  optional: true
           {{- range $name, $uri := .Values.serviceUris }}
             - name: {{ $name | upper }}_SERVICE_URI
               value: {{ $uri | quote }}
