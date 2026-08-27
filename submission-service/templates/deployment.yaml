@@ -79,6 +79,24 @@ spec:
                   name: app-config
                   key: APP_LOG_LEVEL
                   optional: true
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              valueFrom:
+                secretKeyRef:
+                  name: kafka-aiven-credentials
+                  key: bootstrap-servers
+                  optional: true
+            - name: KAFKA_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: kafka-aiven-credentials
+                  key: username
+                  optional: true
+            - name: KAFKA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: kafka-aiven-credentials
+                  key: password
+                  optional: true
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           readinessProbe:
