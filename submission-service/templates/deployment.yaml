@@ -97,6 +97,12 @@ spec:
                   name: kafka-aiven-credentials
                   key: password
                   optional: true
+            - name: KAFKA_CA_PATH
+              value: /etc/kafka/secrets/ca.pem
+          volumeMounts:
+            - name: kafka-ca
+              mountPath: /etc/kafka/secrets
+              readOnly: true
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           readinessProbe:
@@ -111,3 +117,10 @@ spec:
               port: {{ .Values.service.port }}
             initialDelaySeconds: 60
             periodSeconds: 30
+      volumes:
+        - name: kafka-ca
+          secret:
+            secretName: kafka-aiven-credentials
+            items:
+              - key: ca.pem
+                path: ca.pem

@@ -75,7 +75,12 @@ spec:
                   name: kafka-aiven-credentials
                   key: password
                   optional: true
+            - name: KAFKA_CA_PATH
+              value: /etc/kafka/secrets/ca.pem
           volumeMounts:
+            - name: kafka-ca
+              mountPath: /etc/kafka/secrets
+              readOnly: true
             - name: dind-storage
               mountPath: /var/lib/docker
           resources:
@@ -109,5 +114,11 @@ spec:
               memory: 256Mi
               cpu: 100m
       volumes:
+        - name: kafka-ca
+          secret:
+            secretName: kafka-aiven-credentials
+            items:
+              - key: ca.pem
+                path: ca.pem
         - name: dind-storage
           emptyDir: {}
