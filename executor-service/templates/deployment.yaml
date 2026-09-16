@@ -77,6 +77,40 @@ spec:
                   optional: true
             - name: KAFKA_CA_PATH
               value: /etc/kafka/secrets/ca.pem
+            - name: RUSTFS_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: rustfs-secret
+                  key: RUSTFS_ENDPOINT
+                  optional: true
+            - name: RUSTFS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rustfs-secret
+                  key: RUSTFS_ACCESS_KEY
+                  optional: true
+            - name: RUSTFS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: rustfs-secret
+                  key: RUSTFS_SECRET_KEY
+                  optional: true
+            - name: RUSTFS_PUBLIC_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: rustfs-secret
+                  key: RUSTFS_PUBLIC_ENDPOINT
+                  optional: true
+            - name: RUSTFS_BUCKET_NAME
+              value: submission-files
+            - name: COURSE_SERVICE_URL
+              value: http://grading-course-service:8081
+            - name: SUBMISSION_SERVICE_URL
+              value: http://grading-submission-service:8082
+            - name: RESULT_SERVICE_URL
+              value: http://grading-result-service:8084
+            - name: TESTCONTAINERS_RYUK_DISABLED
+              value: "true"
           volumeMounts:
             - name: kafka-ca
               mountPath: /etc/kafka/secrets
@@ -113,6 +147,9 @@ spec:
             requests:
               memory: 256Mi
               cpu: 100m
+            limits:
+              memory: 1Gi
+              cpu: 1000m
       volumes:
         - name: kafka-ca
           secret:

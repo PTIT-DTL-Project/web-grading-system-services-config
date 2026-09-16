@@ -10,7 +10,6 @@ image:
 
 spring:
   profilesActive: stg
-  dbName: api_gateway_db
 
 observability:
   region: dev
