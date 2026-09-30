@@ -55,6 +55,8 @@ spec:
                   name: app-config
                   key: APP_LOG_LEVEL
                   optional: true
+            - name: KEYCLOAK_ISSUER_URI
+              value: {{ .Values.keycloak.issuerUri | quote }}
           {{- range $name, $uri := .Values.serviceUris }}
             - name: {{ $name | upper }}_SERVICE_URI
               value: {{ $uri | quote }}
