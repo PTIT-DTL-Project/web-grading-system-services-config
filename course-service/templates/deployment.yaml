@@ -55,6 +55,13 @@ spec:
                   name: app-config
                   key: APP_LOG_LEVEL
                   optional: true
+            # Trust secret shared with api-gateway (arrives as X-Gateway-Secret);
+            # HeaderAuthenticationFilter fails closed when it is absent.
+            - name: GATEWAY_TRUSTED_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: gateway-trust
+                  key: GATEWAY_TRUSTED_SECRET
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           readinessProbe:

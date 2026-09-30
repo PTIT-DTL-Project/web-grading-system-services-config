@@ -55,12 +55,21 @@ spec:
                   name: app-config
                   key: APP_LOG_LEVEL
                   optional: true
+            # Keycloak issuer the resource server validates tokens against; without
+            # it the gateway falls back to its localhost default and every
+            # authenticated request fails at first use, not at boot.
             - name: KEYCLOAK_ISSUER_URI
               value: {{ .Values.keycloak.issuerUri | quote }}
           {{- range $name, $uri := .Values.serviceUris }}
             - name: {{ $name | upper }}_SERVICE_URI
               value: {{ $uri | quote }}
           {{- end }}
+            # Shared secret stamped as X-Gateway-Secret on forwarded requests.
+            - name: GATEWAY_TRUSTED_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: gateway-trust
+                  key: GATEWAY_TRUSTED_SECRET
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           readinessProbe:

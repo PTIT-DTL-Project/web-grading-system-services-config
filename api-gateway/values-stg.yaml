@@ -20,6 +20,10 @@ serviceUris:
   submission: http://grading-submission-service:8082
   result: http://grading-result-service:8084
 
+# Issuer the api-gateway resource server validates access tokens against.
+keycloak:
+  issuerUri: https://web-dev1-keycloak.vucongtuanduong.dpdns.org/realms/ptit-wgs
+
 service:
   type: ClusterIP
   port: 8080
