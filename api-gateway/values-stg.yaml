@@ -35,6 +35,3 @@ resources:
   requests:
     cpu: 200m
     memory: 256Mi
-
-keycloak:
-  issuerUri: https://web-dev1-keycloak.vucongtuanduong.dpdns.org/realms/ptit-wgs

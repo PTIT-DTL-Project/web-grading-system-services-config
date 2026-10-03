@@ -70,7 +70,42 @@ spec:
                 secretKeyRef:
                   name: gateway-trust
                   key: GATEWAY_TRUSTED_SECRET
-          resources:
+            # Keycloak Admin client used by POST /api/v1/account/change-password
+            # (user lookup + reset-password). WHY this never reaches the frontend:
+            # the FE used to embed VITE_KEYCLOAK_ADMIN_CLIENT_SECRET in the browser
+            # bundle, handing every visitor a credential that could reset any
+            # password — since 2026-10-03 the call runs here and the secret stays
+            # in the keycloak-admin-client K8s Secret only.
+            - name: KEYCLOAK_ADMIN_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-admin-client
+                  key: KEYCLOAK_ADMIN_CLIENT_ID
+            - name: KEYCLOAK_ADMIN_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-admin-client
+                  key: KEYCLOAK_ADMIN_CLIENT_SECRET
+            # Client whose password grant verifies currentPassword in
+            # POST /api/v1/account/change-password (step 2). Phase 3 (2026-10-03, D11):
+            # Direct Access Grants are switched off on the browser's web-grading-fe, so
+            # the gateway authenticates against its own confidential wgs-password-verify
+            # instead — id + secret read from the SAME keycloak-admin-client Secret, never
+            # as a plain value in git. setup-namespace.sh always writes both keys (the id
+            # falls back to web-grading-fe, so this env is never blank) and refuses a
+            # half-set pair: one side only means invalid_client → 502 on that endpoint.
+            # A blank secret is legal and keeps the old public-client behaviour.
+            - name: KEYCLOAK_PASSWORD_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-admin-client
+                  key: KEYCLOAK_PASSWORD_CLIENT_ID
+            - name: KEYCLOAK_PASSWORD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-admin-client
+                  key: KEYCLOAK_PASSWORD_CLIENT_SECRET
+            resources:
             {{- toYaml .Values.resources | nindent 12 }}
           readinessProbe:
             httpGet:
