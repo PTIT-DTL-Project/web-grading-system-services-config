@@ -94,7 +94,10 @@ spec:
             # as a plain value in git. setup-namespace.sh always writes both keys (the id
             # falls back to web-grading-fe, so this env is never blank) and refuses a
             # half-set pair: one side only means invalid_client → 502 on that endpoint.
-            # A blank secret is legal and keeps the old public-client behaviour.
+            # A blank secret sends no client_secret on the wire; against the
+            # confidential wgs-password-verify client that fails
+            # unauthorized_client -> 502 (fail-loud, not a working fallback).
+            # Set KEYCLOAK_PASSWORD_CLIENT_SECRET (runbook §10.2).
             - name: KEYCLOAK_PASSWORD_CLIENT_ID
               valueFrom:
                 secretKeyRef:
