@@ -24,6 +24,11 @@ serviceUris:
 keycloak:
   issuerUri: https://web-dev1-keycloak.vucongtuanduong.dpdns.org/realms/ptit-wgs
 
+# UC-14 change-password exposure (Pullfrog review 2026-10-04): true = endpoint registered,
+# false = 404 (fail closed). Gate only, no limiter behind it yet.
+rateLimit:
+  enabled: true
+
 service:
   type: ClusterIP
   port: 8080

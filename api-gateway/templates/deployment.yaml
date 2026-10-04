@@ -105,7 +105,17 @@ spec:
                 secretKeyRef:
                   name: keycloak-admin-client
                   key: KEYCLOAK_PASSWORD_CLIENT_SECRET
-            resources:
+            # Exposure switch for POST /api/v1/account/change-password (Pullfrog review
+            # 2026-10-04): the controller only registers when this is true, so an
+            # unconfigured deployment answers 404 instead of exposing the public
+            # password-verification path. No limiter sits behind the flag yet — Keycloak
+            # brute force is the throttle. Default true here because stg is opted in;
+            # override to "false" to fail closed in an environment.
+            # hasKey, not `default`: Go templates treat false as empty, so `default true`
+            # would swallow an explicit "false". Missing key falls back to true (opted in).
+            - name: RATE_LIMIT_ENABLED
+              value: {{ if hasKey (.Values.rateLimit | default dict) "enabled" }}{{ .Values.rateLimit.enabled | quote }}{{ else }}"true"{{ end }}
+          resources:
             {{- toYaml .Values.resources | nindent 12 }}
           readinessProbe:
             httpGet:
