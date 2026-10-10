@@ -62,6 +62,9 @@ spec:
                 secretKeyRef:
                   name: gateway-trust
                   key: GATEWAY_TRUSTED_SECRET
+            # Plan weights for max-per-plan scoring (internal course-service API).
+            - name: COURSE_SERVICE_URI
+              value: http://grading-course-service:8081
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           readinessProbe:
