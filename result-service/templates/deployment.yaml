@@ -63,6 +63,10 @@ spec:
                   name: gateway-trust
                   key: GATEWAY_TRUSTED_SECRET
             # Plan weights for max-per-plan scoring (internal course-service API).
+            # Named *_URI like the other feign targets (executor-service uses a
+            # separate *_URL name for the same host — different env namespace,
+            # no collision). The default below covers stg; override only to
+            # point elsewhere.
             - name: COURSE_SERVICE_URI
               value: http://grading-course-service:8081
           resources:
