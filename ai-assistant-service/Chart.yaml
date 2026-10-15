@@ -1,0 +1,5 @@
+apiVersion: v2
+name: ai-assistant-service
+description: Helm chart for ai-assistant-service
+version: 1.0.0
+appVersion: "1.0"

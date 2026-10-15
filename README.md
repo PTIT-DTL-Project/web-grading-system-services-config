@@ -21,7 +21,8 @@ config-services/
 │   └── templates/
 ├── api-gateway/
 ├── result-service/
-└── course-service/
+├── course-service/
+└── ai-assistant-service/   # Helm chart cho AI assistant service (port 8086, db ai_db)
 ```
 
 ## 📝 Quy tắc đặt tên
@@ -33,6 +34,7 @@ Tên service phải khớp với tên trong source repo:
 - `api-gateway`
 - `result-service`
 - `course-service`
+- `ai-assistant-service`
 
 ### Values Files
 - `values-stg.yaml`: Configuration cho staging environment
@@ -187,6 +189,12 @@ git push
 ### course-service
 - Assignment và test case management
 - Database: assignment_db
+
+### ai-assistant-service
+- Port: 8086
+- Database: ai_db
+- Giải thích kết quả chấm (LLM, có fallback khi thiếu key)
+- Env: COURSE_SERVICE_URI, RESULT_SERVICE_URI, AI_* (secret ai-credentials)
 
 ## 🔗 Related Repositories
 

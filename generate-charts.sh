@@ -18,6 +18,7 @@ declare -A SERVICES=(
     ["result-service"]="8084:result_db"
     ["course-service"]="8081:assignment_db"
     ["submission-service"]="8082:submission_db"
+    ["ai-assistant-service"]="8086:ai_db"
 )
 
 DOCKER_USERNAME="vucongtuanduong"
