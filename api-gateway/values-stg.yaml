@@ -19,6 +19,7 @@ serviceUris:
   course: http://grading-course-service:8081
   submission: http://grading-submission-service:8082
   result: http://grading-result-service:8084
+  ai_assistant: http://grading-ai-assistant-service:8086
 
 # Issuer the api-gateway resource server validates access tokens against.
 keycloak:
