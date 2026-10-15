@@ -60,7 +60,7 @@ metadata:
   namespace: argocd
 spec:
   source:
-    repoURL: https://github.com/PTIT-DTL-Project/web-grading-system-config.git
+    repoURL: https://github.com/PTIT-DTL-Project/web-grading-system-services-config.git
     targetRevision: main
     path: submission-service
     helm:
@@ -149,8 +149,8 @@ appVersion: "1.0"
 
 ```bash
 # Clone repo
-git clone https://github.com/PTIT-DTL-Project/web-grading-system-config.git
-cd web-grading-system-config
+git clone https://github.com/PTIT-DTL-Project/web-grading-system-services-config.git
+cd web-grading-system-services-config
 
 # Update version
 cd submission-service
@@ -198,7 +198,7 @@ git push
 
 ## 🔗 Related Repositories
 
-- **Source Repo**: [web-grading-system-services](https://github.com/PTIT-DTL-Project/web-grading-system-services) - Source code
+- **Source Repo**: [web-grading-system-backend-services](https://github.com/PTIT-DTL-Project/web-grading-system-backend-services) - Source code
 - **Deploy Repo**: [web-grading-system-deploy](https://github.com/PTIT-DTL-Project/web-grading-system-deploy) - ArgoCD orchestration
 
 ## 📚 Best Practices
