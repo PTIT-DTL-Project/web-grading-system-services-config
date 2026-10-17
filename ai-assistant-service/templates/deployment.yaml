@@ -96,15 +96,30 @@ spec:
                   key: AI_BASE_URL
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          # Probes target Spring Boot's Kubernetes health groups, NOT the root
+          # /actuator/health. The root endpoint also runs the `db` indicator,
+          # which blocks ~14s while a suspended Neon compute wakes up; with the
+          # 1s default probe timeout that failed 3 times in a row and kubelet
+          # SIGTERM'd the pod in a restart loop (observed 2026-10-17). The
+          # livenessState/readinessState groups answer in ms and never touch the
+          # database. The startupProbe gives the cold JVM (~80s) its own budget
+          # so liveness does not race application startup.
+          startupProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: {{ .Values.service.port }}
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 30
           readinessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/readiness
               port: {{ .Values.service.port }}
-            initialDelaySeconds: 30
             periodSeconds: 10
+            timeoutSeconds: 5
           livenessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/health/liveness
               port: {{ .Values.service.port }}
-            initialDelaySeconds: 60
             periodSeconds: 30
+            timeoutSeconds: 5
