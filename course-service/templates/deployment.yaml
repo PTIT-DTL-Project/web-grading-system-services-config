@@ -62,6 +62,9 @@ spec:
                 secretKeyRef:
                   name: gateway-trust
                   key: GATEWAY_TRUSTED_SECRET
+            # Executor-service base URL for Feign client calls (dry-run, etc.).
+            - name: FEIGN_EXECUTOR_SERVICE_URL
+              value: {{ .Values.feign.executorService.url | quote }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           readinessProbe:

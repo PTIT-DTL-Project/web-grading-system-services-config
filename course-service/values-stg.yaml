@@ -20,6 +20,10 @@ service:
   type: ClusterIP
   port: 8081
 
+feign:
+  executorService:
+    url: http://grading-executor-service:8083
+
 resources:
   limits:
     cpu: 500m
