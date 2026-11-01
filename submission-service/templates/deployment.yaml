@@ -106,6 +106,8 @@ spec:
                   optional: true
             - name: KAFKA_CA_PATH
               value: /etc/kafka/secrets/ca.pem
+            - name: WGS_EVENTS_TOPIC
+              value: {{ .Values.wgs.events.topic | quote }}
           volumeMounts:
             - name: kafka-ca
               mountPath: /etc/kafka/secrets

@@ -111,6 +111,8 @@ spec:
               value: http://grading-result-service:8084
             - name: TESTCONTAINERS_RYUK_DISABLED
               value: "true"
+            - name: WGS_EVENTS_TOPIC
+              value: {{ .Values.wgs.events.topic | quote }}
           volumeMounts:
             - name: kafka-ca
               mountPath: /etc/kafka/secrets
