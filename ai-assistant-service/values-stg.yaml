@@ -27,3 +27,29 @@ resources:
   requests:
     cpu: 200m
     memory: 256Mi
+
+ai:
+  maxCompletionTokens: 8192
+  explanation:
+    maxCompletionTokens: 8192
+
+agent:
+  limits:
+    maxModelSteps: 8
+    maxToolCalls: 12
+    maxModelAttempts: 16
+    maxValidationRepairs: 2
+    maxLookupRounds: 2
+    activeTimeoutSeconds: 120
+  retry:
+    modelMaxRetries: 2
+    safeToolMaxRetries: 2
+  context:
+    maxInputTokens: 26000
+    outputReserve: 4000
+    safetyMargin: 2000
+    historyWindowSize: 10
+    toolSearchLimit: 5
+    historyMaxTokens: 12000
+    toolMaxTokens: 6000
+    storedToolResultTtlMinutes: 60

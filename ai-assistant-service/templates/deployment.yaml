@@ -79,21 +79,111 @@ spec:
                 secretKeyRef:
                   name: ai-credentials
                   key: AI_PROVIDER
+                  optional: true
             - name: AI_API_KEY
               valueFrom:
                 secretKeyRef:
                   name: ai-credentials
                   key: AI_API_KEY
+                  optional: true
             - name: AI_MODEL_NAME
               valueFrom:
                 secretKeyRef:
                   name: ai-credentials
                   key: AI_MODEL_NAME
+                  optional: true
             - name: AI_BASE_URL
               valueFrom:
                 secretKeyRef:
                   name: ai-credentials
                   key: AI_BASE_URL
+                  optional: true
+            - name: AI_MAX_COMPLETION_TOKENS
+              value: {{ .Values.ai.maxCompletionTokens | default 4096 | quote }}
+            # Agent/chat model (separate from explanation)
+            - name: AI_AGENT_PROVIDER
+              valueFrom:
+                secretKeyRef:
+                  name: ai-credentials
+                  key: AI_AGENT_PROVIDER
+                  optional: true
+            - name: AI_AGENT_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ai-credentials
+                  key: AI_AGENT_API_KEY
+                  optional: true
+            - name: AI_AGENT_MODEL_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: ai-credentials
+                  key: AI_AGENT_MODEL_NAME
+                  optional: true
+            - name: AI_AGENT_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: ai-credentials
+                  key: AI_AGENT_BASE_URL
+                  optional: true
+            # Explanation model (separate from agent/chat)
+            - name: AI_EXPLAIN_PROVIDER
+              valueFrom:
+                secretKeyRef:
+                  name: ai-credentials
+                  key: AI_EXPLAIN_PROVIDER
+                  optional: true
+            - name: AI_EXPLAIN_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ai-credentials
+                  key: AI_EXPLAIN_API_KEY
+                  optional: true
+            - name: AI_EXPLAIN_MODEL_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: ai-credentials
+                  key: AI_EXPLAIN_MODEL_NAME
+                  optional: true
+            - name: AI_EXPLAIN_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: ai-credentials
+                  key: AI_EXPLAIN_BASE_URL
+                  optional: true
+            - name: AI_EXPLAIN_MAX_COMPLETION_TOKENS
+              value: {{ .Values.ai.explanation.maxCompletionTokens | quote }}
+            - name: AGENT_MAX_MODEL_STEPS
+              value: {{ .Values.agent.limits.maxModelSteps | quote }}
+            - name: AGENT_MAX_TOOL_CALLS
+              value: {{ .Values.agent.limits.maxToolCalls | quote }}
+            - name: AGENT_MAX_MODEL_ATTEMPTS
+              value: {{ .Values.agent.limits.maxModelAttempts | quote }}
+            - name: AGENT_MAX_VALIDATION_REPAIRS
+              value: {{ .Values.agent.limits.maxValidationRepairs | quote }}
+            - name: AGENT_MAX_LOOKUP_ROUNDS
+              value: {{ .Values.agent.limits.maxLookupRounds | quote }}
+            - name: AGENT_ACTIVE_TIMEOUT_SECONDS
+              value: {{ .Values.agent.limits.activeTimeoutSeconds | quote }}
+            - name: AGENT_MODEL_MAX_RETRIES
+              value: {{ .Values.agent.retry.modelMaxRetries | quote }}
+            - name: AGENT_SAFE_TOOL_MAX_RETRIES
+              value: {{ .Values.agent.retry.safeToolMaxRetries | quote }}
+            - name: AGENT_MAX_INPUT_TOKENS
+              value: {{ .Values.agent.context.maxInputTokens | quote }}
+            - name: AGENT_OUTPUT_RESERVE
+              value: {{ .Values.agent.context.outputReserve | quote }}
+            - name: AGENT_SAFETY_MARGIN
+              value: {{ .Values.agent.context.safetyMargin | quote }}
+            - name: AGENT_HISTORY_WINDOW_SIZE
+              value: {{ .Values.agent.context.historyWindowSize | quote }}
+            - name: AGENT_TOOL_SEARCH_LIMIT
+              value: {{ .Values.agent.context.toolSearchLimit | quote }}
+            - name: AGENT_HISTORY_MAX_TOKENS
+              value: {{ .Values.agent.context.historyMaxTokens | quote }}
+            - name: AGENT_TOOL_MAX_TOKENS
+              value: {{ .Values.agent.context.toolMaxTokens | quote }}
+            - name: AGENT_STORED_TOOL_RESULT_TTL_MINUTES
+              value: {{ .Values.agent.context.storedToolResultTtlMinutes | quote }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           # Probes target Spring Boot's Kubernetes health groups, NOT the root
