@@ -67,15 +67,25 @@ spec:
               value: {{ .Values.feign.executorService.url | quote }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          startupProbe:
+            httpGet:
+              path: /actuator/health
+              port: {{ .Values.service.port }}
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 30
           readinessProbe:
             httpGet:
               path: /actuator/health
               port: {{ .Values.service.port }}
             initialDelaySeconds: 30
             periodSeconds: 10
+            timeoutSeconds: 5
           livenessProbe:
             httpGet:
               path: /actuator/health
               port: {{ .Values.service.port }}
-            initialDelaySeconds: 60
+            initialDelaySeconds: 90
             periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
