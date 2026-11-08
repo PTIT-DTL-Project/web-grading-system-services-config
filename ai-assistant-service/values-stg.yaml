@@ -29,9 +29,9 @@ resources:
     memory: 256Mi
 
 ai:
-  maxCompletionTokens: 8192
+  maxCompletionTokens: 4096
   explanation:
-    maxCompletionTokens: 8192
+    maxCompletionTokens: 4096
 
 agent:
   limits:
@@ -39,17 +39,17 @@ agent:
     maxToolCalls: 12
     maxModelAttempts: 16
     maxValidationRepairs: 2
-    maxLookupRounds: 2
+    maxLookupRounds: 1
     activeTimeoutSeconds: 120
   retry:
     modelMaxRetries: 2
     safeToolMaxRetries: 2
   context:
-    maxInputTokens: 26000
-    outputReserve: 4000
+    maxInputTokens: 64000
+    outputReserve: 4096
     safetyMargin: 2000
     historyWindowSize: 10
-    toolSearchLimit: 5
-    historyMaxTokens: 12000
-    toolMaxTokens: 6000
+    toolSearchLimit: 6
+    historyMaxTokens: 40000
+    toolMaxTokens: 24000
     storedToolResultTtlMinutes: 60
