@@ -1,6 +1,6 @@
 global:
   domain: vucongtuanduong.dpdns.org
-  prefix: web-dev1
+  prefix: web-dev2
 
 image:
   registry: docker.io
@@ -23,7 +23,7 @@ serviceUris:
 
 # Issuer the api-gateway resource server validates access tokens against.
 keycloak:
-  issuerUri: https://web-dev1-keycloak.vucongtuanduong.dpdns.org/realms/ptit-wgs
+  issuerUri: https://web-dev2-keycloak.vucongtuanduong.dpdns.org/realms/ptit-wgs
 
 # UC-14 change-password exposure (Pullfrog review 2026-10-04): true = endpoint registered,
 # false = 404 (fail closed). Gate only, no limiter behind it yet.
