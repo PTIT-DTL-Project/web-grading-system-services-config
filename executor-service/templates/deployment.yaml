@@ -6,6 +6,16 @@ metadata:
     app: {{ include "executor-service.name" . }}
 spec:
   replicas: {{ .Values.replicaCount | default 2 }}
+  # maxSurge: 0: a rolling update must reuse the slot of the pod it replaces.
+  # The default (25% -> 1 extra pod) briefly runs THREE executor pods, i.e. one
+  # more app JVM (~350-450 MiB) plus one more dind sidecar on a node that is
+  # already at ~6.5/7.6 GiB. That extra pod is what turns a routine image bump
+  # into an OOMKill or a Pending pod that blocks the rollout.
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
   selector:
     matchLabels:
       app: {{ include "executor-service.name" . }}

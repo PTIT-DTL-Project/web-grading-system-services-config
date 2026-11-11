@@ -107,12 +107,22 @@ resources:
 Mỗi service có thể có thêm values riêng, ví dụ:
 
 **submission-service:**
+Không có `accessKey`/`secretKey` trong values: chart đọc credentials từ Secret
+`rustfs-secret` — cùng Secret mà RustFS server dùng làm root credentials
+(`RUSTFS_ACCESS_KEY` / `RUSTFS_SECRET_KEY`), nên không có khóa nào nằm trong Git
+và server/client không thể lệch nhau:
 ```yaml
-rustfs:
-  endpoint: http://rustfs:9000
-  accessKey: minioadmin
-  secretKey: minioadmin
-  bucketName: submission-files
+# templates/deployment.yaml
+- name: RUSTFS_ACCESS_KEY
+  valueFrom:
+    secretKeyRef:
+      name: rustfs-secret
+      key: RUSTFS_ACCESS_KEY
+- name: RUSTFS_SECRET_KEY
+  valueFrom:
+    secretKeyRef:
+      name: rustfs-secret
+      key: RUSTFS_SECRET_KEY
 ```
 
 ## 📦 Chart Structure

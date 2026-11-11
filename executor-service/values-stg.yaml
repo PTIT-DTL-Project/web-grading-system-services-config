@@ -20,6 +20,13 @@ service:
   type: ClusterIP
   port: 8083
 
+# Bắt buộc 2 replica: mỗi pod gồm app JVM (512Mi limit) + sidecar dind
+# (1Gi limit), tức ~512Mi request / ~1.5Gi limit mỗi pod. Đây là mức tối thiểu
+# để chấm song song nhiều bài và để một pod rollout/restart không làm mất
+# toàn bộ năng lực chấm. Trên node 8 GB, phần RAM tiết kiệm được phải đến từ
+# các workload khác (Keycloak/RustFS/ArgoCD, xem docs/observability/README.md §10).
+# Deployment đặt maxSurge: 0 để lúc cập nhật image không bao giờ có pod thứ 3
+# (pod thứ 3 = thêm ~500MB thực trên node đang khít RAM).
 replicaCount: 2
 
 resources:
